@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pumpkin-pi"
+version = "0.1.0"
+description = "Simple Raspberry Pi scaffold with simulated GPIO"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  { name = "Your Name" }
+]
+dependencies = []
+
+[project.optional-dependencies]
+rpi = ["gpiozero>=1.6.2"]
+
+[project.scripts]
+pumpkin-pi = "pumpkin_pi.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
