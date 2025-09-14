@@ -21,4 +21,3 @@ def test_invalid_args():
         pass
     else:
         raise AssertionError("Expected ValueError for negative count")
-

@@ -3,4 +3,3 @@ __all__ = [
 ]
 
 from .blinker import Blinker  # noqa: E402
-

@@ -37,7 +37,10 @@ class Blinker:
                 self._led = LEDClass(self.pin)  # type: ignore[call-arg]
             except Exception as e:  # Hardware errors or misconfiguration
                 # Fall back to simulation if hardware cannot be initialized
-                print(f"[pumpkin-pi] GPIO init failed ({e}); using simulation.", file=sys.stderr)
+                print(
+                    f"[pumpkin-pi] GPIO init failed ({e}); using simulation.",
+                    file=sys.stderr,
+                )
                 self._use_gpio = False
                 self._led = None
 
@@ -66,6 +69,7 @@ class Blinker:
             for i in range(count):
                 print(f"[pumpkin-pi] Simulated LED on (pin {self.pin}) [{i+1}/{count}]")
                 time.sleep(interval)
-                print(f"[pumpkin-pi] Simulated LED off (pin {self.pin}) [{i+1}/{count}]")
+                print(
+                    f"[pumpkin-pi] Simulated LED off (pin {self.pin}) [{i+1}/{count}]"
+                )
                 time.sleep(interval)
-

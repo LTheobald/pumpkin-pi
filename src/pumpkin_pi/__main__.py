@@ -11,10 +11,17 @@ def build_parser() -> argparse.ArgumentParser:
         prog="pumpkin-pi",
         description="Pumpkin Pi: simple Raspberry Pi scaffold with simulated GPIO",
     )
-    p.add_argument("--pin", type=int, default=17, help="GPIO pin number (BCM). Default: 17")
-    p.add_argument("--count", type=int, default=3, help="Number of blink cycles. Default: 3")
     p.add_argument(
-        "--interval", type=float, default=0.5, help="Seconds between on/off. Default: 0.5"
+        "--pin", type=int, default=17, help="GPIO pin number (BCM). Default: 17"
+    )
+    p.add_argument(
+        "--count", type=int, default=3, help="Number of blink cycles. Default: 3"
+    )
+    p.add_argument(
+        "--interval",
+        type=float,
+        default=0.5,
+        help="Seconds between on/off. Default: 0.5",
     )
     p.add_argument(
         "--simulate",
@@ -44,4 +51,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
