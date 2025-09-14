@@ -4,12 +4,31 @@ Simple Python scaffold for Raspberry Pi projects with a CLI and a safe simulatio
 
 ## Quick Start
 
+### Local (without Docker)
+
 - Requires Python 3.9+
 - Install dev deps and run tests:
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
-pip install -e . pytest
+pip install -e .[dev]
+pre-commit run --all-files
+pytest -q
+```
+
+### Dockerized Development
+
+Build the image and drop into a shell with the project mounted:
+
+```bash
+docker compose build
+docker compose run --rm dev
+```
+
+Inside the container the dependencies are installed; run the same checks:
+
+```bash
+pre-commit run --all-files
 pytest -q
 ```
 
@@ -36,21 +55,16 @@ python -m pumpkin_pi --count 3 --interval 0.5 --pin 17
 - `tests/` – Minimal pytest tests
 - `.github/workflows/ci.yml` – CI workflow targeting a self-hosted runner
 
-## GitHub Actions (Self-Hosted Runner)
+## GitHub Actions
 
-The included workflow runs on `runs-on: self-hosted`. Make sure your runner has:
+The workflow at `.github/workflows/ci.yml` runs on every push and pull request and has two jobs:
 
-- Access to the repository
-- Python installed (workflow uses `actions/setup-python` to install 3.11)
+1. **lint-test** – runs `pre-commit` and `pytest` on an Ubuntu runner with pip caching.
+2. **hardware-test** – executes the tests on the Raspberry Pi self-hosted runner, also using pip caching.
 
-If your runner uses additional labels (e.g., `self-hosted`, `linux`, `arm64`), you can adjust the job like:
-
-```yaml
-runs-on: [self-hosted, linux, arm64]
-```
+Ensure your Pi runner is online and labeled `raspberrypi`.
 
 ## Notes
 
 - The code auto-detects availability of `gpiozero`. If not available or `--simulate` is provided, it prints simulated blink events instead of controlling hardware.
 - Default pin is BCM 17; adjust with `--pin`.
-

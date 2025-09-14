@@ -15,6 +15,13 @@ dependencies = []
 
 [project.optional-dependencies]
 rpi = ["gpiozero>=1.6.2"]
+dev = [
+    "pytest",
+    "pre-commit",
+    "black",
+    "ruff",
+    "isort",
+]
 
 [project.scripts]
 pumpkin-pi = "pumpkin_pi.__main__:main"
@@ -28,3 +35,11 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+line-length = 88
