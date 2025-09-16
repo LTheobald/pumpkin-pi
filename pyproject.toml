@@ -11,7 +11,14 @@ requires-python = ">=3.9"
 authors = [
   { name = "Your Name" }
 ]
-dependencies = []
+dependencies = [
+    "mypy>=1.18.1",
+    "pre-commit>=4.3.0",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
+    "pytest-xdist>=3.8.0",
+    "ruff>=0.13.0",
+]
 
 [project.optional-dependencies]
 rpi = ["gpiozero>=1.6.2"]
@@ -21,6 +28,11 @@ dev = [
     "black",
     "ruff",
     "isort",
+]
+pi-dependencies = [
+    "gpiozero",
+    "smbus2",
+    "spidev",
 ]
 
 [project.scripts]
